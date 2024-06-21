@@ -1,14 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Editing Tool</title>
+  <link rel="stylesheet" href="css/nullstyle.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
+  <div class="wrapper">
+    <header class="heading">
+      <div class="container">
+        <h1 class="heading__title">Image Editing Tool</h1>
+        <p class="heading__description">Загрузите свое изображение и начните творить! В конце вы сможете скачать
+          полученное изображение.
+        </p>
+      </div>
+    </header>
+    <main class="main">
+      <div class="container">
+        <section class="workspace">
+          <div class="workspace__upload">
+            <input type="file" id="upload" name="upload" accept=".png, .jpg, .jpeg">
+          </div>
+          <div class="workspace__tools tools">
+            <div class="tools__item">
+              <input type="range" id="saturate" name="saturate" min="0" max="500" value="100">
+              <label for="saturate">Насыщенность</label>
+            </div>
+            <div class="tools__item">
+              <input type="range" id="brightness" name="brightness" min="0" max="500" value="100">
+              <label for="brightness">Яркость</label>
+            </div>
+            <div class="tools__item">
+              <input type="range" id="contrast" name="contrast" min="0" max="500" value="100">
+              <label for="contrast">Контраст</label>
+            </div>
+            <div class="tools__item">
+              <input type="range" id="blur" name="blur" min="0" max="100" value="0">
+              <label for="blur">Размытие</label>
+            </div>
+            <div class="tools__item">
+              <input type="checkbox" id="scaleX" name="scaleX">
+              <label for="scaleX">Отразить по вертикали</label>
+            </div>
+            <div class="tools__item">
+              <input type="checkbox" id="scaleY" name="scaleY">
+              <label for="scaleY">Отразить по горизонтали</label>
+            </div>
+            <div class="tools__item">
+              <input type="range" id="borderWidth" name="borderWidth" min="0" max="500" value="0">
+              <label for="borderWidth">Толщина обводки</label>
+            </div>
+            <div class="tools__item">
+              <label for="borderStyle">Стиль обводки</label>
+              <select name="borderStyle" id="borderStyle">
+                <option value="none" selected>Нет</option>
+                <option value="solid">Сплошной</option>
+                <option value="dotted">Пунктирный</option>
+                <option value="dashed">Штриховой</option>
+                <option value="double">Двойной</option>
+                <option value="groove">Groove</option>
+                <option value="ridge">Ridge</option>
+                <option value="inset">Inset</option>
+                <option value="outset">Outset</option>
+              </select>
+            </div>
+            <div class="tools__item">
+              <input type="color" id="borderColor" name="borderColor" value="#ff0000">
+              <label for="borderColor">Цвет обводки</label>
+            </div>
+            <div class="tools__item">
+              <input type="range" id="borderRadius" name="borderRadius" min="0" max="100" value="0">
+              <label for="borderRadius">Закругление углов</label>
+            </div>
+          </div>
+          <div class="workspace__image">
+            <img src="assets/demo.png" alt="Your image" id="image">
+          </div>
+          <div class="workspace__download">
+            <button>Скачать</button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="footer__contacts"> By <a href="https://github.com/id-andyyy" class="footer__contacts_link"
+          target="_blank">Andy</a></p>
+    </footer>
+  </div>
+  <script src="js/index.js"></script>
 </body>
 
 </html>
