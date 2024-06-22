@@ -81,10 +81,10 @@ function downloadImage() {
 
   document.body.appendChild(canvas);
 
-  ctx.filter = filterValue;
 
   drawRoundRect(ctx, '#ffffff', borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue / 1.25, 'source-over', 'source-in')
 
+  ctx.filter = filterValue;
   const scaleX = transformValue.match(/scaleX\((.+?)\)/)[1],
     scaleY = transformValue.match(/scaleY\((.+?)\)/)[1];
   ctx.translate(scaleX == 1 ? 0 : canvas.width, scaleY == 1 ? 0 : canvas.height);
@@ -105,8 +105,8 @@ function downloadImage() {
   document.body.appendChild(link);
   link.click();
 
-  // document.body.removeChild(canvas);
-  // document.body.removeChild(link);
+  document.body.removeChild(canvas);
+  document.body.removeChild(link);
 }
 
 function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue, operationTypeBefore = 'source-over', operationTypeAfter = 'source-over') {
