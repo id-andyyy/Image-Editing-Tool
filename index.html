@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Editing Tool</title>
-  <link rel="stylesheet" href="css/nullstyle.css">
+  <!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -26,56 +26,78 @@
             <input type="file" id="upload" name="upload" accept=".png, .jpg, .jpeg">
           </div>
           <div class="workspace__tools tools">
-            <div class="tools__item">
-              <input type="range" id="saturate" name="saturate" min="0" max="500" value="100">
-              <label for="saturate">Насыщенность</label>
-            </div>
-            <div class="tools__item">
-              <input type="range" id="brightness" name="brightness" min="0" max="500" value="100">
-              <label for="brightness">Яркость</label>
-            </div>
-            <div class="tools__item">
-              <input type="range" id="contrast" name="contrast" min="0" max="500" value="100">
-              <label for="contrast">Контраст</label>
-            </div>
-            <div class="tools__item">
-              <input type="range" id="blur" name="blur" min="0" max="100" value="0">
-              <label for="blur">Размытие</label>
-            </div>
-            <div class="tools__item">
-              <input type="checkbox" id="scaleX" name="scaleX">
-              <label for="scaleX">Отразить по вертикали</label>
-            </div>
-            <div class="tools__item">
-              <input type="checkbox" id="scaleY" name="scaleY">
-              <label for="scaleY">Отразить по горизонтали</label>
-            </div>
-            <div class="tools__item">
-              <input type="range" id="borderWidth" name="borderWidth" min="0" max="500" value="0">
-              <label for="borderWidth">Толщина обводки</label>
-            </div>
-            <div class="tools__item">
-              <label for="borderStyle">Стиль обводки</label>
-              <select name="borderStyle" id="borderStyle">
-                <option value="none" selected>Нет</option>
-                <option value="solid">Сплошной</option>
-                <option value="dotted">Пунктирный</option>
-                <option value="dashed">Штриховой</option>
-                <option value="double">Двойной</option>
-                <option value="groove">Groove</option>
-                <option value="ridge">Ridge</option>
-                <option value="inset">Inset</option>
-                <option value="outset">Outset</option>
-              </select>
-            </div>
-            <div class="tools__item">
-              <input type="color" id="borderColor" name="borderColor" value="#ff0000">
-              <label for="borderColor">Цвет обводки</label>
-            </div>
-            <div class="tools__item">
-              <input type="range" id="borderRadius" name="borderRadius" min="0" max="100" value="0">
-              <label for="borderRadius">Закругление углов</label>
-            </div>
+            <fieldset class="tools__group" id="color">
+              <legend class="tools__description">Цвет</legend>
+              <div class="tools__item">
+                <input type="range" id="saturate" name="saturate" class="tools__input" min="0" max="500" value="100">
+                <label for="saturate">Насыщенность</label>
+              </div>
+              <div class="tools__item">
+                <input type="range" id="brightness" name="brightness" class="tools__input" min="0" max="500"
+                  value="100">
+                <label for="brightness">Яркость</label>
+              </div>
+              <div class="tools__item">
+                <input type="range" id="contrast" name="contrast" class="tools__input" min="0" max="500" value="100">
+                <label for="contrast">Контраст</label>
+              </div>
+              <div class="tools__item">
+                <input type="range" id="hueRotate" name="hue-rotate" class="tools__input" min="0" max="360" value="0">
+                <label for="hueRotate">Оттенок</label>
+              </div>
+              <div class="tools__item">
+                <input type="range" id="blur" name="blur" class="tools__input" min="0" max="100" value="0">
+                <label for="blur">Размытие</label>
+              </div>
+              <div class="tools__item">
+                <input type="checkbox" id="invert" name="invert" class="tools__input">
+                <label for="invert">Инвертировать цвета</label>
+              </div>
+            </fieldset>
+            <fieldset class="tools__group" id="orientation">
+              <legend class="tools__description">Ориентация</legend>
+              <div class="tools__item">
+                <input type="checkbox" id="scaleX" name="scaleX" class="tools__input">
+                <label for="scaleX">Отразить по вертикали</label>
+              </div>
+              <div class="tools__item">
+                <input type="checkbox" id="scaleY" name="scaleY" class="tools__input">
+                <label for="scaleY">Отразить по горизонтали</label>
+              </div>
+            </fieldset>
+            <fieldset class="tools__group" id="border">
+              <legend class="tools__description">Обводка</legend>
+              <div class="tools__item">
+                <input type="range" id="borderWidth" name="border-width" class="tools__input" min="0" max="100"
+                  value="0">
+                <label for="borderWidth">Толщина обводки</label>
+              </div>
+              <div class="tools__item">
+                <label for="borderStyle">Стиль обводки</label>
+                <select name="border-style" id="borderStyle" class="tools__input">
+                  <option value="solid" selected>Сплошной</option>
+                  <option value="dotted">Пунктирный</option>
+                  <option value="dashed">Штриховой</option>
+                  <option value="double">Двойной</option>
+                  <option value="groove">Groove</option>
+                  <option value="ridge">Ridge</option>
+                  <option value="inset">Inset</option>
+                  <option value="outset">Outset</option>
+                </select>
+              </div>
+              <div class="tools__item">
+                <input type="color" id="borderColor" name="border-color" class="tools__input" value="#ff0000">
+                <label for="borderColor">Цвет обводки</label>
+              </div>
+            </fieldset>
+            <fieldset class="tools__group" id="radius">
+              <legend class="tools__description">Углы</legend>
+              <div class="tools__item">
+                <input type="range" id="borderRadius" name="border-radius" class="tools__input" min="0" max="100"
+                  value="0">
+                <label for="borderRadius">Закругление углов</label>
+              </div>
+            </fieldset>
           </div>
           <div class="workspace__image">
             <img src="assets/demo.png" alt="Your image" id="image">
