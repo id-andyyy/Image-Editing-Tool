@@ -53,6 +53,10 @@
                 <input type="checkbox" id="invert" name="invert" class="tools__input">
                 <label for="invert">Инвертировать цвета</label>
               </div>
+              <div class="tools__item">
+                <input type="checkbox" id="sepia" name="sepia" class="tools__input">
+                <label for="sepia">Сепия</label>
+              </div>
             </fieldset>
             <fieldset class="tools__group" id="orientation">
               <legend class="tools__description">Ориентация</legend>
@@ -73,27 +77,14 @@
                 <label for="borderWidth">Толщина обводки</label>
               </div>
               <div class="tools__item">
-                <label for="borderStyle">Стиль обводки</label>
-                <select name="border-style" id="borderStyle" class="tools__input">
-                  <option value="solid" selected>Сплошной</option>
-                  <option value="dotted">Пунктирный</option>
-                  <option value="dashed">Штриховой</option>
-                  <option value="double">Двойной</option>
-                  <option value="groove">Groove</option>
-                  <option value="ridge">Ridge</option>
-                  <option value="inset">Inset</option>
-                  <option value="outset">Outset</option>
-                </select>
-              </div>
-              <div class="tools__item">
                 <input type="color" id="borderColor" name="border-color" class="tools__input" value="#ae00ff">
-                <label for="borderColor">Цвет обводки</label>
+                <label for="borderColor">Цвет обводки (зависит от выбранного оттенка)</label>
               </div>
             </fieldset>
             <fieldset class="tools__group" id="radius">
               <legend class="tools__description">Углы</legend>
               <div class="tools__item">
-                <input type="range" id="borderRadius" name="border-radius" class="tools__input" min="0" max="100"
+                <input type="range" id="borderRadius" name="border-radius" class="tools__input" min="0" max="300"
                   value="0">
                 <label for="borderRadius">Закругление углов</label>
               </div>
