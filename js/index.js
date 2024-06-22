@@ -7,21 +7,20 @@ const colorTools = document.querySelectorAll('#color .tools__input'),
 
 upload.addEventListener('input', handleFileSelect);
 
-colorTools.forEach((tool) => tool.addEventListener('input', setImageStyle.bind(this, colorTools, 'filter')));
-orientationTools.forEach((tool) => tool.addEventListener('input', setImageStyle.bind(this, orientationTools, 'transform')));
-borderTools.forEach((tool) => tool.addEventListener('input', setImageStyle.bind(this, borderTools, 'border')));
-radiusTools.forEach((tool) => tool.addEventListener('input', setImageStyle.bind(this, radiusTools, 'border-radius')));
-
+initializeToolListeners(colorTools, 'filter');
+initializeToolListeners(orientationTools, 'transform');
+initializeToolListeners(borderTools, 'border');
+initializeToolListeners(radiusTools, 'border-radius');
 
 function handleFileSelect(event) {
-  let file = event.target.files[0];
+  const file = event.target.files[0];
   if (file) {
     readFile(file, setImageSrc);
   }
 }
 
 function readFile(file, callback) {
-  let reader = new FileReader();
+  const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result))
   reader.readAsDataURL(file);
 }
@@ -30,49 +29,33 @@ function setImageSrc(dataURL) {
   image.src = dataURL;
 }
 
-function setImageStyle(toolsGroup, propertyName) {
+function initializeToolListeners(toolsGroup, styleProperty) {
+  toolsGroup.forEach((tool) => tool.addEventListener('input', updateImageStyle.bind(this, toolsGroup, styleProperty)));
+
+}
+
+function updateImageStyle(toolsGroup, propertyName) {
   image.style[propertyName] = getAssembledProperty.call(this, toolsGroup);
 }
 
-function getAssembledProperty(toolGroup) {
-  let properties = [];
-  for (let node of toolGroup) {
-    properties.push(getProperty.call(this, node));
-  }
-  return properties.join(' ');
+function getAssembledProperty(toolsGroup) {
+  return Array.from(toolsGroup).map(getProperty).join(' ');
 }
 
 function getProperty(node) {
-  let propertyName = node.name,
+  const propertyName = node.name,
     propertyValue = node.value;
-  switch (propertyName) {
-    case 'hue-rotate':
-      return `${propertyName}(${propertyValue}deg)`;
-    case 'blur':
-      return `${propertyName}(${propertyValue}px)`;
-    case 'invert':
-      switch (node.checked) {
-        case true:
-          return `${propertyName}(1)`;
-        default:
-          return `${propertyName}(0)`;
-      };
-    case 'scaleX':
-    case 'scaleY':
-      switch (node.checked) {
-        case true:
-          return `${propertyName}(-1)`;
-        default:
-          return `${propertyName}(1)`;
-      };
-    case 'border-width':
-      return `${propertyValue}px`;
-    case 'border-style':
-    case 'border-color':
-      return `${propertyValue}`;
-    case 'border-radius':
-      return `${propertyValue}%`;
-    default:
-      return `${propertyName}(${propertyValue}%)`;
-  }
+  const propertyMap = {
+    'hue-rotate': `hue-rotate(${propertyValue}deg)`,
+    'blur': `blur(${propertyValue}px)`,
+    'invert': `invert(${node.checked ? 1 : 0})`,
+    'scaleX': `scaleX(${node.checked ? -1 : 1})`,
+    'scaleY': `scaleY(${node.checked ? -1 : 1})`,
+    'border-width': `${propertyValue}px`,
+    'border-style': propertyValue,
+    'border-color': propertyValue,
+    'border-radius': `${propertyValue}%`,
+  };
+
+  return propertyMap[propertyName] || `${propertyName}(${propertyValue}%)`;
 }
