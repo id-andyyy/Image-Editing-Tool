@@ -1,7 +1,6 @@
 document.querySelector('#upload').addEventListener('input', handleFileSelect);
 
 const imageNode = document.querySelector('#image');
-const canvasImage = new Image();
 const colorToolsNode = document.querySelectorAll('#color .group__input'),
   orientationToolsNode = document.querySelectorAll('#orientation .group__input'),
   borderToolsNode = document.querySelectorAll('#border .group__input'),
@@ -12,7 +11,7 @@ initializeToolListeners(orientationToolsNode, 'transform');
 initializeToolListeners(borderToolsNode, 'border');
 initializeToolListeners(radiusToolsNode, 'border-radius');
 
-document.querySelector('#download').addEventListener('click', downloadImage);
+document.querySelector('#download').addEventListener('click', downloadImage.bind(this, imageNode));
 
 function handleFileSelect(event) {
   const file = event.target.files[0];
@@ -23,9 +22,9 @@ function handleFileSelect(event) {
 
 function readFile(file) {
   const imageUrl = URL.createObjectURL(file);
-  canvasImage.src = imageNode.src = imageUrl;
+  imageNode.src = imageUrl;
   imageNode.onerror = function () {
-    canvasImage.src = imageNode.src = 'assets/demo.png';
+    imageNode.src = 'assets/demo.png';
     showError('Картинка не поддерживается. Загрузите другую.');
   }
 }
@@ -44,10 +43,10 @@ function updateImageStyle(toolsGroup, propertyName) {
 }
 
 function getAssembledProperty(toolsGroup) {
-  return Array.from(toolsGroup).map(getProperty).join(' ');
+  return Array.from(toolsGroup).map(getCSSProperty).join(' ');
 }
 
-function getProperty(node) {
+function getCSSProperty(node) {
   const propertyName = node.name,
     propertyValue = node.value;
   const propertyMap = {
@@ -69,9 +68,28 @@ function getProperty(node) {
   return propertyMap[propertyName];
 }
 
-function downloadImage() {
+function downloadImage(imageNode) {
   const canvasNode = document.createElement('canvas');
   const ctx = canvasNode.getContext('2d');
+
+  prepareCanvas(canvasNode, ctx, imageNode);
+
+  const canvasUrl = canvasNode.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.href = canvasUrl;
+  link.download = 'edited-image.png';
+
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(canvasNode);
+  document.body.removeChild(link);
+}
+
+function prepareCanvas(canvasNode, ctx, imageNode) {
+  const canvasImage = new Image();
+  canvasImage.src = imageNode.src;
+
   const imageWidthValue = canvasImage.width,
     imageHeightValue = canvasImage.height,
     filterValue = imageNode.style.filter,
@@ -92,24 +110,13 @@ function downloadImage() {
     scaleY = transformValue.match(/scaleY\((.+?)\)/)[1];
   ctx.translate(scaleX == 1 ? 0 : canvasNode.width, scaleY == 1 ? 0 : canvasNode.height);
   ctx.scale(scaleX, scaleY);
-  console.log(canvasImage.width, canvasImage.height, imageNode.width, imageNode.height);
+
   ctx.drawImage(canvasImage, borderSizeValue, borderSizeValue);
 
   drawRoundRect(ctx, '#ffffff', borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue / 1.25, 'destination-over', 'destination-over');
   if (borderSizeValue) {
     drawRoundRect(ctx, borderColorValue, 0, canvasNode.width, canvasNode.height, borderRadiusValue, 'destination-over');
   }
-
-  const canvasUrl = canvasNode.toDataURL('image/png');
-  const link = document.createElement('a');
-  link.href = canvasUrl;
-  link.download = 'edited-image.png';
-
-  document.body.appendChild(link);
-  link.click();
-
-  document.body.removeChild(canvasNode);
-  document.body.removeChild(link);
 }
 
 function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue, operationTypeBefore = 'source-over', operationTypeAfter = 'source-over') {
