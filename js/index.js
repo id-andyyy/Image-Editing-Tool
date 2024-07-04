@@ -1,6 +1,7 @@
 document.querySelector('#upload').addEventListener('input', handleFileSelect);
 
 const imageNode = document.querySelector('#image');
+const canvasImage = new Image();
 const colorToolsNode = document.querySelectorAll('#color .group__input'),
   orientationToolsNode = document.querySelectorAll('#orientation .group__input'),
   borderToolsNode = document.querySelectorAll('#border .group__input'),
@@ -22,10 +23,9 @@ function handleFileSelect(event) {
 
 function readFile(file) {
   const imageUrl = URL.createObjectURL(file);
-  console.log(imageUrl)
-  imageNode.src = imageUrl;
+  canvasImage.src = imageNode.src = imageUrl;
   imageNode.onerror = function () {
-    imageNode.src = 'assets/demo.png';
+    canvasImage.src = imageNode.src = 'assets/demo.png';
     showError('Картинка не поддерживается. Загрузите другую.');
   }
 }
@@ -72,8 +72,8 @@ function getProperty(node) {
 function downloadImage() {
   const canvasNode = document.createElement('canvas');
   const ctx = canvasNode.getContext('2d');
-  const imageWidthValue = imageNode.width,
-    imageHeightValue = imageNode.height,
+  const imageWidthValue = canvasImage.width,
+    imageHeightValue = canvasImage.height,
     filterValue = imageNode.style.filter,
     transformValue = imageNode.style.transform,
     borderSizeValue = parseInt(imageNode.style.borderWidth),
@@ -92,7 +92,8 @@ function downloadImage() {
     scaleY = transformValue.match(/scaleY\((.+?)\)/)[1];
   ctx.translate(scaleX == 1 ? 0 : canvasNode.width, scaleY == 1 ? 0 : canvasNode.height);
   ctx.scale(scaleX, scaleY);
-  ctx.drawImage(imageNode, borderSizeValue, borderSizeValue);
+  console.log(canvasImage.width, canvasImage.height, imageNode.width, imageNode.height);
+  ctx.drawImage(canvasImage, borderSizeValue, borderSizeValue);
 
   drawRoundRect(ctx, '#ffffff', borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue / 1.25, 'destination-over', 'destination-over');
   if (borderSizeValue) {
@@ -107,8 +108,8 @@ function downloadImage() {
   document.body.appendChild(link);
   link.click();
 
-  // document.body.removeChild(canvasNode);
-  // document.body.removeChild(link);
+  document.body.removeChild(canvasNode);
+  document.body.removeChild(link);
 }
 
 function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue, operationTypeBefore = 'source-over', operationTypeAfter = 'source-over') {
