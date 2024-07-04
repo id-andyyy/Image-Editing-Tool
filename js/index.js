@@ -1,10 +1,10 @@
 document.querySelector('#upload').addEventListener('input', handleFileSelect);
 
 const image = document.querySelector('#image');
-const colorTools = document.querySelectorAll('#color .tools__input'),
-  orientationTools = document.querySelectorAll('#orientation .tools__input'),
-  borderTools = document.querySelectorAll('#border .tools__input'),
-  radiusTools = document.querySelectorAll('#radius .tools__input');
+const colorTools = document.querySelectorAll('#color .group__input'),
+  orientationTools = document.querySelectorAll('#orientation .group__input'),
+  borderTools = document.querySelectorAll('#border .group__input'),
+  radiusTools = document.querySelectorAll('#radius .group__input');
 
 initializeToolListeners(colorTools, 'filter');
 initializeToolListeners(orientationTools, 'transform');

@@ -5,90 +5,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Editing Tool</title>
-  <!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
   <div class="wrapper">
     <header class="heading">
       <div class="container">
-        <h1 class="heading__title">Image Editing Tool</h1>
-        <p class="heading__description">Загрузите свое изображение и начните творить! В конце вы сможете скачать
-          полученное изображение.
-        </p>
+        <div class="greeting">
+          <h1 class="greeting__title">Image Editing Tool</h1>
+          <p class="greeting__description">Загрузите свое изображение и начните творить!
+          </p>
+        </div>
       </div>
     </header>
     <main class="main">
       <div class="container">
         <section class="workspace">
-          <div class="workspace__upload">
+          <div class="workspace__upload row">
             <input type="file" id="upload" name="upload" accept=".png, .jpg, .jpeg">
           </div>
-          <div class="workspace__tools tools">
-            <fieldset class="tools__group" id="color">
-              <legend class="tools__description">Цвет</legend>
-              <div class="tools__item">
-                <input type="range" id="saturate" name="saturate" class="tools__input" min="0" max="500" value="100">
-                <label for="saturate">Насыщенность</label>
-              </div>
-              <div class="tools__item">
-                <input type="range" id="brightness" name="brightness" class="tools__input" min="0" max="500"
-                  value="100">
-                <label for="brightness">Яркость</label>
-              </div>
-              <div class="tools__item">
-                <input type="range" id="contrast" name="contrast" class="tools__input" min="0" max="500" value="100">
-                <label for="contrast">Контраст</label>
-              </div>
-              <div class="tools__item">
-                <input type="range" id="hueRotate" name="hue-rotate" class="tools__input" min="0" max="360" value="0">
-                <label for="hueRotate">Оттенок</label>
-              </div>
-              <div class="tools__item">
-                <input type="range" id="blur" name="blur" class="tools__input" min="0" max="100" value="0">
-                <label for="blur">Размытие</label>
-              </div>
-              <div class="tools__item">
-                <input type="checkbox" id="invert" name="invert" class="tools__input">
-                <label for="invert">Инвертировать цвета</label>
-              </div>
-              <div class="tools__item">
-                <input type="checkbox" id="sepia" name="sepia" class="tools__input">
-                <label for="sepia">Сепия</label>
-              </div>
-            </fieldset>
-            <fieldset class="tools__group" id="orientation">
-              <legend class="tools__description">Ориентация</legend>
-              <div class="tools__item">
-                <input type="checkbox" id="scaleX" name="scaleX" class="tools__input">
-                <label for="scaleX">Отразить по вертикали</label>
-              </div>
-              <div class="tools__item">
-                <input type="checkbox" id="scaleY" name="scaleY" class="tools__input">
-                <label for="scaleY">Отразить по горизонтали</label>
-              </div>
-            </fieldset>
-            <fieldset class="tools__group" id="border">
-              <legend class="tools__description">Обводка</legend>
-              <div class="tools__item">
-                <input type="range" id="borderWidth" name="border-width" class="tools__input" min="0" max="100"
-                  value="0">
-                <label for="borderWidth">Толщина обводки</label>
-              </div>
-              <div class="tools__item">
-                <input type="color" id="borderColor" name="border-color" class="tools__input" value="#ae00ff">
-                <label for="borderColor">Цвет обводки (зависит от выбранного оттенка)</label>
-              </div>
-            </fieldset>
-            <fieldset class="tools__group" id="radius">
-              <legend class="tools__description">Углы</legend>
-              <div class="tools__item">
-                <input type="range" id="borderRadius" name="border-radius" class="tools__input" min="0" max="300"
-                  value="0">
-                <label for="borderRadius">Закругление углов</label>
-              </div>
-            </fieldset>
+          <div class="workspace__tools tools row">
+            <div class="col-2">
+              <fieldset class="tools__group group" id="color">
+                <div class="group__description">
+                  <legend class="group__legend">Цвет</legend>
+                </div>
+                <div class="group__row">
+                  <label for="saturate" class="group__label group-item">Насыщенность</label>
+                  <input type="range" id="saturate" name="saturate" class="group__input group-item" min="0" max="500"
+                    value="100">
+                </div>
+                <div class="group__row">
+                  <label for="brightness" class="group__label group-item">Яркость</label>
+                  <input type="range" id="brightness" name="brightness" class="group__input group-item" min="0"
+                    max="500" value="100">
+                </div>
+                <div class="group__row">
+                  <label for="contrast" class="group__label group-item">Контраст</label>
+                  <input type="range" id="contrast" name="contrast" class="group__input group-item" min="0" max="500"
+                    value="100">
+                </div>
+                <div class="group__row">
+                  <label for="hueRotate" class="group__label group-item">Оттенок</label>
+                  <input type="range" id="hueRotate" name="hue-rotate" class="group__input group-item" min="0" max="360"
+                    value="0">
+                </div>
+                <div class="group__row">
+                  <label for="blur" class="group__label group-item">Размытие</label>
+                  <input type="range" id="blur" name="blur" class="group__input group-item" min="0" max="100" value="0">
+                </div>
+                <div class="group__row">
+                  <label for="invert" class="group__label group-item">Инвертировать цвета</label>
+                  <input type="checkbox" id="invert" name="invert" class="group__input group-item">
+                </div>
+                <div class="group__row">
+                  <label for="sepia" class="group__label group-item">Сепия</label>
+                  <input type="checkbox" id="sepia" name="sepia" class="group__input group-item">
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-2">
+              <fieldset class="tools__group group" id="orientation">
+                <div class="group__description">
+                  <legend class="group__legend">Ориентация</legend>
+                </div>
+                <div class="group__row">
+                  <label for="scaleX" class="group__label">Отразить по вертикали</label>
+                  <input type="checkbox" id="scaleX" name="scaleX" class="group__input">
+                </div>
+                <div class="group__row">
+                  <label for="scaleY" class="group__label">Отразить по горизонтали</label>
+                  <input type="checkbox" id="scaleY" name="scaleY" class="group__input">
+                </div>
+              </fieldset>
+              <fieldset class="tools__group group" id="border">
+                <div class="group__description">
+                  <legend class="group__legend">Обводка</legend>
+                </div>
+                <div class="group__row">
+                  <label for="borderWidth" class="group__label">Толщина</label>
+                  <input type="range" id="borderWidth" name="border-width" class="group__input" min="0" max="100"
+                    value="0">
+                </div>
+                <div class="group__row">
+                  <label for="borderColor" class="group__label">Цвет (зависит от выбранного оттенка)</label>
+                  <input type="color" id="borderColor" name="border-color" class="group__input" value="#ae00ff">
+                </div>
+              </fieldset>
+              <fieldset class="tools__group group" id="radius">
+                <div class="group__description">
+                  <legend class="group__legend">Углы</legend>
+                </div>
+                <div class="group__row">
+                  <label for="borderRadius" class="group__label">Закругление</label>
+                  <input type="range" id="borderRadius" name="border-radius" class="group__input" min="0" max="300"
+                    value="0">
+                </div>
+              </fieldset>
+            </div>
           </div>
           <div class="workspace__image">
             <img src="assets/demo.png" alt="Your image" id="image">
@@ -100,8 +119,10 @@
       </div>
     </main>
     <footer class="footer">
-      <p class="footer__contacts"> By <a href="https://github.com/id-andyyy" class="footer__contacts_link"
-          target="_blank">Andy</a></p>
+      <div class="container">
+        <p class="footer__contacts"> By <a href="https://github.com/id-andyyy" class="footer__contacts_link"
+            target="_blank">Andy</a></p>
+      </div>
     </footer>
   </div>
   <script src="js/index.js"></script>
