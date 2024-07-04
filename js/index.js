@@ -13,6 +13,9 @@ initializeToolListeners(radiusToolsNode, 'border-radius');
 
 document.querySelector('#download').addEventListener('click', downloadImage.bind(this, imageNode));
 
+const resetNode = document.querySelectorAll('.group__reset');
+resetNode.forEach((item) => item.addEventListener('click', resetProperty));
+
 function handleFileSelect(event) {
   const file = event.target.files[0];
   if (file) {
@@ -125,4 +128,27 @@ function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageH
   ctx.roundRect(borderSizeValue, borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue);
   ctx.fill();
   ctx.globalCompositeOperation = operationTypeAfter;
+}
+
+function resetProperty(event) {
+  const rangeNode = event.target.previousElementSibling;
+  rangeNode.value = getDefaultValue(rangeNode.name);
+  updateImageStyle(getToolsGroup(rangeNode), 'filter');
+}
+
+function getDefaultValue(rangeName) {
+  const valueMap = {
+    'saturate': '100',
+    'brightness': '100',
+    'contrast': '100',
+    'hue-rotate': '0',
+    'blur': '0',
+    'border-width': '0',
+    'border-radius': '0',
+  }
+  return valueMap[rangeName];
+}
+
+function getToolsGroup(rangeNode) {
+  return rangeNode.parentElement.parentElement.querySelectorAll('.group__input');
 }

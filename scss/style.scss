@@ -57,6 +57,11 @@ body {
   }
 }
 
+.workspace {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #image {
   border-style: solid !important;
   max-width: 100%;
