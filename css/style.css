@@ -33,7 +33,7 @@ body {
   width: 100%;
   font-size: 100%;
   line-height: 1;
-  font-size: 14px;
+  font-size: 16px;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -87,12 +87,43 @@ h6 {
 
 body {
   font-family: "Mulish", sans-serif;
+  color: #010675;
 }
 
 .container {
-  max-width: 1200px;
+  width: clamp(320px, 89.84375vw, 1150px);
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin: 15px 0 0 0;
+}
+.greeting__logo {
+  height: 1em;
+  margin: 0 0.375em 0 0;
+}
+.greeting__title {
+  font-size: calc(22px + 18 * (100vw - 320px) / 960);
+  font-weight: 700;
+}
+.greeting__title_first {
+  color: #b834ff;
+}
+.greeting__title_second {
+  color: #0eddff;
+}
+.greeting__title_third {
+  color: #ff5a3e;
+}
+.greeting__description {
+  font-size: calc(15px + 5 * (100vw - 320px) / 960);
+  font-weight: 500;
+  text-align: center;
 }
 
 #image {

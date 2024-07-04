@@ -1,13 +1,60 @@
-@import "nullstyle";
+@import "nullstyle.scss";
+
+$main-font-color: #010675;
+$danger-font-color: #ff5a3e;
+$success-font-color: #7aff2e;
+$light-font-color: #0eddff;
+$accent-font-color: #b834ff;
+$danger-color: #feb0a3;
+$success-color: #c4fea3;
+$light-color: #a3f1fe;
+$accent-color: #dea3fe;
+
+@function adaptive-value($max-value, $min-value, $max-size: 1280, $min-size: 320) {
+  @return calc(
+    #{$min-value + px} + (($max-value - $min-value) * ((100vw - #{$min-size + px}) / ($max-size - $min-size)))
+  );
+}
 
 body {
   font-family: "Mulish", sans-serif;
+  color: $main-font-color;
 }
 
 .container {
-  max-width: 1200px;
+  width: clamp(320px, #{1150 / 1280 * 100 + vw}, 1150px);
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin: 15px 0 0 0;
+  &__logo {
+    height: 1em;
+    margin: 0 #{15 / 40 + em} 0 0;
+  }
+  &__title {
+    font-size: adaptive-value(40, 22);
+    font-weight: 700;
+    &_first {
+      color: $accent-font-color;
+    }
+    &_second {
+      color: $light-font-color;
+    }
+    &_third {
+      color: $danger-font-color;
+    }
+  }
+  &__description {
+    font-size: adaptive-value(20, 15);
+    font-weight: 500;
+    text-align: center;
+  }
 }
 
 #image {
