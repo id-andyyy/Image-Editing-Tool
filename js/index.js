@@ -1,33 +1,37 @@
 document.querySelector('#upload').addEventListener('input', handleFileSelect);
 
-const image = document.querySelector('#image');
-const colorTools = document.querySelectorAll('#color .group__input'),
-  orientationTools = document.querySelectorAll('#orientation .group__input'),
-  borderTools = document.querySelectorAll('#border .group__input'),
-  radiusTools = document.querySelectorAll('#radius .group__input');
+const imageNode = document.querySelector('#image');
+const colorToolsNode = document.querySelectorAll('#color .group__input'),
+  orientationToolsNode = document.querySelectorAll('#orientation .group__input'),
+  borderToolsNode = document.querySelectorAll('#border .group__input'),
+  radiusToolsNode = document.querySelectorAll('#radius .group__input');
 
-initializeToolListeners(colorTools, 'filter');
-initializeToolListeners(orientationTools, 'transform');
-initializeToolListeners(borderTools, 'border');
-initializeToolListeners(radiusTools, 'border-radius');
+initializeToolListeners(colorToolsNode, 'filter');
+initializeToolListeners(orientationToolsNode, 'transform');
+initializeToolListeners(borderToolsNode, 'border');
+initializeToolListeners(radiusToolsNode, 'border-radius');
 
 document.querySelector('#download').addEventListener('click', downloadImage);
 
 function handleFileSelect(event) {
   const file = event.target.files[0];
   if (file) {
-    readFile(file, setImageSrc);
+    readFile(file);
   }
 }
 
-function readFile(file, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(file);
+function readFile(file) {
+  const imageUrl = URL.createObjectURL(file);
+  console.log(imageUrl)
+  imageNode.src = imageUrl;
+  imageNode.onerror = function () {
+    imageNode.src = 'assets/demo.png';
+    showError('Картинка не поддерживается. Загрузите другую.');
+  }
 }
 
-function setImageSrc(dataURL) {
-  image.src = dataURL;
+function showError(message) {
+  alert(message);
 }
 
 function initializeToolListeners(toolsGroup, styleProperty) {
@@ -36,7 +40,7 @@ function initializeToolListeners(toolsGroup, styleProperty) {
 }
 
 function updateImageStyle(toolsGroup, propertyName) {
-  image.style[propertyName] = getAssembledProperty.call(this, toolsGroup);
+  imageNode.style[propertyName] = getAssembledProperty.call(this, toolsGroup);
 }
 
 function getAssembledProperty(toolsGroup) {
@@ -66,38 +70,36 @@ function getProperty(node) {
 }
 
 function downloadImage() {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  const imageWidthValue = image.width,
-    imageHeightValue = image.height,
-    filterValue = image.style.filter,
-    transformValue = image.style.transform,
-    borderSizeValue = parseInt(image.style.borderWidth),
-    borderColorValue = image.style.borderColor,
-    borderRadiusValue = parseInt(image.style.borderRadius);
+  const canvasNode = document.createElement('canvas');
+  const ctx = canvasNode.getContext('2d');
+  const imageWidthValue = imageNode.width,
+    imageHeightValue = imageNode.height,
+    filterValue = imageNode.style.filter,
+    transformValue = imageNode.style.transform,
+    borderSizeValue = parseInt(imageNode.style.borderWidth),
+    borderColorValue = imageNode.style.borderColor,
+    borderRadiusValue = parseInt(imageNode.style.borderRadius);
 
-  canvas.width = imageWidthValue + borderSizeValue * 2;
-  canvas.height = imageHeightValue + borderSizeValue * 2;
+  canvasNode.width = imageWidthValue + borderSizeValue * 2;
+  canvasNode.height = imageHeightValue + borderSizeValue * 2;
 
-  document.body.appendChild(canvas);
-
+  document.body.appendChild(canvasNode);
 
   drawRoundRect(ctx, '#ffffff', borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue / 1.25, 'source-over', 'source-in')
 
   ctx.filter = filterValue;
   const scaleX = transformValue.match(/scaleX\((.+?)\)/)[1],
     scaleY = transformValue.match(/scaleY\((.+?)\)/)[1];
-  ctx.translate(scaleX == 1 ? 0 : canvas.width, scaleY == 1 ? 0 : canvas.height);
+  ctx.translate(scaleX == 1 ? 0 : canvasNode.width, scaleY == 1 ? 0 : canvasNode.height);
   ctx.scale(scaleX, scaleY);
-  ctx.drawImage(image, borderSizeValue, borderSizeValue);
-
+  ctx.drawImage(imageNode, borderSizeValue, borderSizeValue);
 
   drawRoundRect(ctx, '#ffffff', borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue / 1.25, 'destination-over', 'destination-over');
   if (borderSizeValue) {
-    drawRoundRect(ctx, borderColorValue, 0, canvas.width, canvas.height, borderRadiusValue, 'destination-over');
+    drawRoundRect(ctx, borderColorValue, 0, canvasNode.width, canvasNode.height, borderRadiusValue, 'destination-over');
   }
 
-  const canvasUrl = canvas.toDataURL('image/png');
+  const canvasUrl = canvasNode.toDataURL('image/png');
   const link = document.createElement('a');
   link.href = canvasUrl;
   link.download = 'edited-image.png';
@@ -105,8 +107,8 @@ function downloadImage() {
   document.body.appendChild(link);
   link.click();
 
-  document.body.removeChild(canvas);
-  document.body.removeChild(link);
+  // document.body.removeChild(canvasNode);
+  // document.body.removeChild(link);
 }
 
 function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageHeightValue, borderRadiusValue, operationTypeBefore = 'source-over', operationTypeAfter = 'source-over') {
