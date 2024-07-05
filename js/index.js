@@ -1,23 +1,16 @@
+const imageNode = document.querySelector('#image');
 document.querySelector('#upload').addEventListener('input', handleFileSelect);
 
-const imageNode = document.querySelector('#image');
-const colorToolsNode = document.querySelectorAll('#color .group__input'),
-  orientationToolsNode = document.querySelectorAll('#orientation .group__input'),
-  borderToolsNode = document.querySelectorAll('#border .group__input'),
-  radiusToolsNode = document.querySelectorAll('#radius .group__input');
-
-initializeToolListeners(colorToolsNode, 'filter');
-initializeToolListeners(orientationToolsNode, 'transform');
-initializeToolListeners(borderToolsNode, 'border');
-initializeToolListeners(radiusToolsNode, 'border-radius');
+const toolsNode = document.querySelectorAll('.group__input');
+toolsNode.forEach((tool) => tool.addEventListener('input', (e) => handleRangeInput(e.target.name)));
 
 document.querySelector('#download').addEventListener('click', downloadImage.bind(this, imageNode));
 
 const resetNode = document.querySelectorAll('.group__reset');
 resetNode.forEach((item) => item.addEventListener('click', resetProperty));
 
-function handleFileSelect(event) {
-  const file = event.target.files[0];
+function handleFileSelect(e) {
+  const file = e.target.files[0];
   if (file) {
     readFile(file);
   }
@@ -27,7 +20,7 @@ function readFile(file) {
   const imageUrl = URL.createObjectURL(file);
   imageNode.src = imageUrl;
   imageNode.onerror = function () {
-    imageNode.src = 'assets/demo.png';
+    imageNode.src = 'assets/default.png';
     showError('Картинка не поддерживается. Загрузите другую.');
   }
 }
@@ -36,17 +29,43 @@ function showError(message) {
   alert(message);
 }
 
-function initializeToolListeners(toolsGroup, styleProperty) {
-  toolsGroup.forEach((tool) => tool.addEventListener('input', updateImageStyle.bind(this, toolsGroup, styleProperty)));
-  updateImageStyle.call(this, toolsGroup, styleProperty);
+function handleRangeInput(propertyName) {
+  const propertyGroups = [
+    {
+      title: 'filter',
+      properties: ['saturate', 'brightness', 'contrast', 'hue-rotate', 'blur', 'invert', 'sepia'],
+    },
+    {
+      title: 'transform',
+      properties: ['scaleX', 'scaleY'],
+    },
+    {
+      title: 'border',
+      properties: ['border-width', 'border-color'],
+    },
+    {
+      title: 'border-radius',
+      properties: ['border-radius'],
+    },
+  ];
+  for (let group of propertyGroups) {
+    if (group.properties.includes(propertyName)) {
+      updateImageStyle(group.title, group.properties)
+      break;
+    }
+  }
 }
 
-function updateImageStyle(toolsGroup, propertyName) {
-  imageNode.style[propertyName] = getAssembledProperty.call(this, toolsGroup);
+function updateImageStyle(groupTitle, groupProperties) {
+  imageNode.style[groupTitle] = getAssembledProperty(groupProperties);
 }
 
-function getAssembledProperty(toolsGroup) {
-  return Array.from(toolsGroup).map(getCSSProperty).join(' ');
+function getAssembledProperty(properties) {
+  return properties.map(getInputNodeById).map(getCSSProperty).join(' ');
+}
+
+function getInputNodeById(propertyId) {
+  return document.querySelector(`#${propertyId}`);
 }
 
 function getCSSProperty(node) {
@@ -130,10 +149,10 @@ function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageH
   ctx.globalCompositeOperation = operationTypeAfter;
 }
 
-function resetProperty(event) {
-  const rangeNode = event.target.previousElementSibling;
+function resetProperty(e) {
+  const rangeNode = e.target.previousElementSibling;
   rangeNode.value = getDefaultValue(rangeNode.name);
-  updateImageStyle(getToolsGroup(rangeNode), 'filter');
+  handleRangeInput(rangeNode.name);
 }
 
 function getDefaultValue(rangeName) {
@@ -147,8 +166,4 @@ function getDefaultValue(rangeName) {
     'border-radius': '0',
   }
   return valueMap[rangeName];
-}
-
-function getToolsGroup(rangeNode) {
-  return rangeNode.parentElement.parentElement.querySelectorAll('.group__input');
 }
