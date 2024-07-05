@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-  width: clamp(320px, #{1150 / 1280 * 100 + vw}, 1150px);
+  width: clamp(320px, #{calc(1150 / 1280 * 100) + vw}, 1150px);
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -35,7 +35,7 @@ body {
   margin: 15px 0 0 0;
   &__logo {
     height: 1em;
-    margin: 0 #{15 / 40 + em} 0 0;
+    margin: 0 #{calc(15 / 40) + em} 0 0;
   }
   &__title {
     font-size: adaptive-value(40, 22);
@@ -60,6 +60,133 @@ body {
 .workspace {
   display: flex;
   flex-wrap: wrap;
+}
+
+.toolbox {
+  &__upload {
+    display: flex;
+    align-items: center;
+    gap: #{calc(15 / 16) + em};
+  }
+}
+
+.button-tool {
+  font-size: adaptive-value(16, 14);
+  &__input {
+    display: none;
+  }
+  &__btn {
+    display: inline-block;
+    border: 2px solid $main-font-color;
+    @media (max-width: 768px) {
+      border-width: 1.5px;
+    }
+    border-radius: 4px;
+    background-color: white;
+    color: $main-font-color;
+    font-size: adaptive-value(16, 14);
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    padding: 7px 11px;
+    min-width: 160px;
+    @media (max-width: 425px) {
+      min-width: 110px;
+    }
+    &:hover {
+      background-color: $main-font-color;
+      color: white;
+    }
+    transition:
+      color 0.5s,
+      background-color 0.5s;
+  }
+  &__filename {
+    font-weight: 500;
+  }
+}
+
+@mixin browsers-thumb {
+  &::-webkit-slider-thumb {
+    @content;
+  }
+  &::-moz-range-thumb {
+    @content;
+  }
+  &::-ms-thumb {
+    @content;
+  }
+}
+
+@mixin browsers-track {
+  &::-webkit-slider-runnable-track {
+    @content;
+  }
+  &::-moz-range-track {
+    @content;
+  }
+  &::-ms-track {
+    @content;
+  }
+}
+
+@mixin range-color($color) {
+  background-image: linear-gradient($color, $color);
+  @include browsers-thumb() {
+    background: $color;
+  }
+}
+
+.group {
+  &__description {
+    font-size: adaptive-value(18, 15);
+    font-weight: 600;
+  }
+  &__legend {
+    text-align: center;
+  }
+  &__input {
+    &[type="range"] {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 235px;
+      height: 10px;
+      border: 1px solid #b2b2b2;
+      border-radius: 5px;
+      background: #efefef;
+      background-repeat: no-repeat;
+      @include browsers-thumb {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        width: adaptive-value(21, 20);
+        height: adaptive-value(21, 20);
+        border-radius: 50%;
+        border: none;
+        cursor: ew-resize;
+      }
+      @include browsers-track() {
+        box-shadow: none;
+        background: transparent;
+      }
+    }
+    &#saturate,
+    &#border-radius {
+      @include range-color($danger-color);
+    }
+    &#brightness,
+    &#hue-rotate {
+      @include range-color($accent-color);
+    }
+    &#contrast,
+    &#border-width {
+      @include range-color($light-color);
+    }
+    &#blur {
+      @include range-color($success-color);
+    }
+  }
 }
 
 #image {

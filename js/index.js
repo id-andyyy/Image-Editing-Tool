@@ -1,8 +1,11 @@
 const imageNode = document.querySelector('#image');
-document.querySelector('#upload').addEventListener('input', handleFileSelect);
+const filenameNode = document.querySelector('.button-tool__filename');
+const uploadNode = document.querySelector('#upload');
+uploadNode.addEventListener('input', handleFileSelect);
 
 const toolsNode = document.querySelectorAll('.group__input');
 toolsNode.forEach((tool) => tool.addEventListener('input', (e) => handleRangeInput(e.target.name)));
+toolsNode.forEach((tool) => handleRangeInput(tool.name));
 
 document.querySelector('#download').addEventListener('click', downloadImage.bind(this, imageNode));
 
@@ -11,17 +14,24 @@ resetNode.forEach((item) => item.addEventListener('click', resetProperty));
 
 function handleFileSelect(e) {
   const file = e.target.files[0];
+  filenameNode.textContent = getShortFilename(file.name);
   if (file) {
     readFile(file);
   }
+}
+
+function getShortFilename(filename) {
+  if (filename.length <= 20) return filename;
+  return filename.slice(0, 10) + '…' + filename.slice(-10);
 }
 
 function readFile(file) {
   const imageUrl = URL.createObjectURL(file);
   imageNode.src = imageUrl;
   imageNode.onerror = function () {
-    imageNode.src = 'assets/default.png';
+    filenameNode.textContent = 'Файл не выбран';
     showError('Картинка не поддерживается. Загрузите другую.');
+    imageNode.src = 'assets/default.png';
   }
 }
 
@@ -50,7 +60,7 @@ function handleRangeInput(propertyName) {
   ];
   for (let group of propertyGroups) {
     if (group.properties.includes(propertyName)) {
-      updateImageStyle(group.title, group.properties)
+      updateImageStyle(group.title, group.properties);
       break;
     }
   }
@@ -61,11 +71,18 @@ function updateImageStyle(groupTitle, groupProperties) {
 }
 
 function getAssembledProperty(properties) {
-  return properties.map(getInputNodeById).map(getCSSProperty).join(' ');
+  return properties.map(getInputNodeById).map(updateRangeNode).map(getCSSProperty).join(' ');
 }
 
 function getInputNodeById(propertyId) {
   return document.querySelector(`#${propertyId}`);
+}
+
+function updateRangeNode(node) {
+  if (node.type == 'range') {
+    node.style.backgroundSize = `${node.value / node.max * 100}% 100%`;
+  }
+  return node;
 }
 
 function getCSSProperty(node) {
@@ -89,6 +106,7 @@ function getCSSProperty(node) {
 
   return propertyMap[propertyName];
 }
+
 
 function downloadImage(imageNode) {
   const canvasNode = document.createElement('canvas');

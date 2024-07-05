@@ -28,13 +28,15 @@
       <div class="container">
         <section class="workspace">
           <div class="workspace__toolbox toolbox">
-            <div class="toolbox__upload">
-              <input type="file" id="upload" name="upload" accept="image/*">
+            <div class="toolbox__upload button-tool">
+              <label for="upload" class="button-tool__btn">Выберите файл</label>
+              <div class="button-tool__filename">Файл не выбран</div>
+              <input type="file" id="upload" name="upload" accept="image/*" class="button-tool__input">
             </div>
             <div class="toolbox__ranges">
-              <fieldset class="toolbox__group group" id="color">
+              <fieldset class="toolbox__group group" id="filter">
                 <div class="group__description">
-                  <legend class="group__legend">Цвет</legend>
+                  <legend class="group__legend">Фильтры</legend>
                 </div>
                 <div class="group__item">
                   <label for="saturate" class="group__label">Насыщенность</label>
@@ -113,13 +115,13 @@
                 </div>
               </fieldset>
             </div>
-            <div class="toolbox__download">
-              <button id="download">Скачать</button>
+            <div class="toolbox__download button-tool">
+              <button id="download" class="button-tool__btn">Скачать</button>
             </div>
           </div>
           <div class="workspace__result result">
             <div class="result__image">
-              <img src="assets/demo.png" alt="Загруженное изображение" id="image">
+              <img src="assets/default.png" alt="Загруженное изображение" id="image">
             </div>
           </div>
         </section>

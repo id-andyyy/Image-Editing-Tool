@@ -131,6 +131,159 @@ body {
   flex-wrap: wrap;
 }
 
+.toolbox__upload {
+  display: flex;
+  align-items: center;
+  gap: 0.9375em;
+}
+
+.button-tool {
+  font-size: calc(14px + 2 * (100vw - 320px) / 960);
+}
+.button-tool__input {
+  display: none;
+}
+.button-tool__btn {
+  display: inline-block;
+  border: 2px solid #010675;
+  border-radius: 4px;
+  background-color: white;
+  color: #010675;
+  font-size: calc(14px + 2 * (100vw - 320px) / 960);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  padding: 7px 11px;
+  min-width: 160px;
+  transition: color 0.5s, background-color 0.5s;
+}
+@media (max-width: 768px) {
+  .button-tool__btn {
+    border-width: 1.5px;
+  }
+}
+@media (max-width: 425px) {
+  .button-tool__btn {
+    min-width: 110px;
+  }
+}
+.button-tool__btn:hover {
+  background-color: #010675;
+  color: white;
+}
+.button-tool__filename {
+  font-weight: 500;
+}
+
+.group__description {
+  font-size: calc(15px + 3 * (100vw - 320px) / 960);
+  font-weight: 600;
+}
+.group__legend {
+  text-align: center;
+}
+.group__input[type=range] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 235px;
+  height: 10px;
+  border: 1px solid #b2b2b2;
+  border-radius: 5px;
+  background: #efefef;
+  background-repeat: no-repeat;
+}
+.group__input[type=range]::-webkit-slider-thumb {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: calc(20px + 1 * (100vw - 320px) / 960);
+  height: calc(20px + 1 * (100vw - 320px) / 960);
+  border-radius: 50%;
+  border: none;
+  cursor: ew-resize;
+}
+.group__input[type=range]::-moz-range-thumb {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: calc(20px + 1 * (100vw - 320px) / 960);
+  height: calc(20px + 1 * (100vw - 320px) / 960);
+  border-radius: 50%;
+  border: none;
+  cursor: ew-resize;
+}
+.group__input[type=range]::-ms-thumb {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: calc(20px + 1 * (100vw - 320px) / 960);
+  height: calc(20px + 1 * (100vw - 320px) / 960);
+  border-radius: 50%;
+  border: none;
+  cursor: ew-resize;
+}
+.group__input[type=range]::-webkit-slider-runnable-track {
+  box-shadow: none;
+  background: transparent;
+}
+.group__input[type=range]::-moz-range-track {
+  box-shadow: none;
+  background: transparent;
+}
+.group__input[type=range]::-ms-track {
+  box-shadow: none;
+  background: transparent;
+}
+.group__input#saturate, .group__input#border-radius {
+  background-image: linear-gradient(#feb0a3, #feb0a3);
+}
+.group__input#saturate::-webkit-slider-thumb, .group__input#border-radius::-webkit-slider-thumb {
+  background: #feb0a3;
+}
+.group__input#saturate::-moz-range-thumb, .group__input#border-radius::-moz-range-thumb {
+  background: #feb0a3;
+}
+.group__input#saturate::-ms-thumb, .group__input#border-radius::-ms-thumb {
+  background: #feb0a3;
+}
+.group__input#brightness, .group__input#hue-rotate {
+  background-image: linear-gradient(#dea3fe, #dea3fe);
+}
+.group__input#brightness::-webkit-slider-thumb, .group__input#hue-rotate::-webkit-slider-thumb {
+  background: #dea3fe;
+}
+.group__input#brightness::-moz-range-thumb, .group__input#hue-rotate::-moz-range-thumb {
+  background: #dea3fe;
+}
+.group__input#brightness::-ms-thumb, .group__input#hue-rotate::-ms-thumb {
+  background: #dea3fe;
+}
+.group__input#contrast, .group__input#border-width {
+  background-image: linear-gradient(#a3f1fe, #a3f1fe);
+}
+.group__input#contrast::-webkit-slider-thumb, .group__input#border-width::-webkit-slider-thumb {
+  background: #a3f1fe;
+}
+.group__input#contrast::-moz-range-thumb, .group__input#border-width::-moz-range-thumb {
+  background: #a3f1fe;
+}
+.group__input#contrast::-ms-thumb, .group__input#border-width::-ms-thumb {
+  background: #a3f1fe;
+}
+.group__input#blur {
+  background-image: linear-gradient(#c4fea3, #c4fea3);
+}
+.group__input#blur::-webkit-slider-thumb {
+  background: #c4fea3;
+}
+.group__input#blur::-moz-range-thumb {
+  background: #c4fea3;
+}
+.group__input#blur::-ms-thumb {
+  background: #c4fea3;
+}
+
 #image {
   border-style: solid !important;
   max-width: 100%;
