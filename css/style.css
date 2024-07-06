@@ -420,16 +420,15 @@ body {
 .group__input[type=color]:focus:focus-visible {
   outline: 2px solid #dea3fe;
 }
-.group__reset {
-  cursor: pointer;
-  background-color: white;
+
+.reset {
+  background-color: transparent;
   transform: rotate(0deg);
   transition: all 0.5s;
 }
-.group__reset:hover, .group__reset:focus {
+.reset:hover, .reset:focus:focus-visible {
   transform: rotate(360deg);
 }
-
 .reset__image {
   width: 100%;
 }

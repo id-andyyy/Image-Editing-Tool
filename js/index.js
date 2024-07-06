@@ -10,7 +10,7 @@ toolsNode.forEach((tool) => handleRangeInput(tool.name));
 
 document.querySelector('#download').addEventListener('click', downloadImage.bind(this, imageNode));
 
-const resetNode = document.querySelectorAll('.group__reset');
+const resetNode = document.querySelectorAll('.reset');
 resetNode.forEach((item) => item.addEventListener('click', resetProperty));
 
 function handleFileSelect(e) {
@@ -185,7 +185,7 @@ function drawRoundRect(ctx, colorValue, borderSizeValue, imageWidthValue, imageH
 }
 
 function resetProperty(e) {
-  const rangeNode = e.target.previousElementSibling;
+  const rangeNode = e.target.previousElementSibling ?? e.target.parentNode.previousElementSibling;
   rangeNode.value = getDefaultValue(rangeNode.name);
   handleRangeInput(rangeNode.name);
 }

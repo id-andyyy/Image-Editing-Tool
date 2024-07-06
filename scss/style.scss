@@ -305,19 +305,16 @@ body {
       }
     }
   }
-  &__reset {
-    cursor: pointer;
-    background-color: white;
-    transform: rotate(0deg);
-    transition: all 0.5s;
-    &:hover,
-    &:focus {
-      transform: rotate(360deg);
-    }
-  }
 }
 
 .reset {
+  background-color: transparent;
+  transform: rotate(0deg);
+  transition: all 0.5s;
+  &:hover,
+  &:focus:focus-visible {
+    transform: rotate(360deg);
+  }
   &__image {
     width: 100%;
   }
