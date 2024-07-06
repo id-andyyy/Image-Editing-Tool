@@ -18,9 +18,96 @@ $bg-input-color: #efefef;
   );
 }
 
+@function percentage-value($dimension, $value, $max-width: 1280, $max-height: 832) {
+  @if $dimension == width {
+    @return calc($value / $max-width * 100%);
+  } @else {
+    @return calc($value / $max-height * 100%);
+  }
+}
 body {
   font-family: "Mulish", sans-serif;
   color: $main-font-color;
+}
+
+.geometry {
+  overflow: hidden;
+  &__image {
+    z-index: -100;
+    position: absolute;
+    &:nth-of-type(1) {
+      width: 100px;
+      top: percentage-value(height, 25);
+      left: percentage-value(width, 50);
+      @media (max-height: 831px) or (max-width: 1100px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(2) {
+      width: 35px;
+      top: percentage-value(height, 33);
+      left: percentage-value(width, 260);
+      @media (max-width: 879px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(3) {
+      width: 50px;
+      top: percentage-value(height, 90);
+      right: percentage-value(width, 268);
+      @media (max-width: 949px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(4) {
+      width: 120px;
+      top: percentage-value(height, 34);
+      right: percentage-value(width, 46);
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(5) {
+      width: 130px;
+      bottom: percentage-value(height, 10);
+      left: percentage-value(width, -53);
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(6) {
+      width: 50px;
+      bottom: percentage-value(height, 20);
+      left: percentage-value(width, 440);
+      @media (max-height: 979px) or (min-width: 2349px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(7) {
+      width: 80px;
+      bottom: percentage-value(height, 322);
+      left: percentage-value(width, -24);
+      @media (max-width: 474px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(8) {
+      width: 120px;
+      bottom: percentage-value(height, 20);
+      right: percentage-value(width, 350);
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    &:nth-of-type(9) {
+      width: 120px;
+      bottom: percentage-value(height, 90);
+      right: percentage-value(width, 68);
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  }
 }
 
 .container {
@@ -40,6 +127,7 @@ body {
     margin: 0 #{calc(15 / 40) + em} 0 0;
   }
   &__title {
+    background-color: white;
     font-size: adaptive-value(40, 22);
     font-weight: 700;
     &_first {
@@ -53,6 +141,7 @@ body {
     }
   }
   &__description {
+    background-color: white;
     font-size: adaptive-value(20, 15);
     font-weight: 500;
     text-align: center;
@@ -73,6 +162,7 @@ body {
 }
 
 .toolbox {
+  background-color: white;
   margin-bottom: 20px;
   &__upload {
     display: flex;
