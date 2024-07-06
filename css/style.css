@@ -418,13 +418,36 @@ body {
   margin-top: 25px;
   padding-bottom: 20px;
 }
+.footer__content {
+  display: flex;
+  justify-content: center;
+}
 .footer__contacts {
-  text-align: center;
   font-size: calc(14px + 2 * (100vw - 320px) / 960);
   font-weight: 500;
 }
 .footer__contacts_link {
   font-weight: 700;
   color: #b834ff;
-  text-decoration: underline;
+}
+.footer__contacts::after {
+  content: "";
+  background-image: url("/assets/github.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  transform: translate(200%, -10%);
+  transition: all 0.5s ease-in-out;
+}
+.footer__contacts:hover {
+  position: relative;
+}
+.footer__contacts:hover::after {
+  opacity: 1;
+  transform: translate(100%, -10%);
 }
