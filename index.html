@@ -29,7 +29,7 @@
         <section class="workspace">
           <div class="workspace__toolbox toolbox">
             <div class="toolbox__upload button-tool">
-              <label for="upload" class="button-tool__btn">Выберите файл</label>
+              <label for="upload" class="button-tool__btn" tabindex="0">Выберите файл</label>
               <div class="button-tool__filename">Файл не выбран</div>
               <input type="file" id="upload" name="upload" accept="image/*" class="button-tool__input">
             </div>
@@ -40,40 +40,52 @@
                 </div>
                 <div class="group__item group__item_range">
                   <label for="saturate" class="group__label">Насыщенность</label>
-                  <input type="range" id="saturate" name="saturate" class="group__input" min="0" max="300" value="100">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                  <input type="range" id="saturate" name="saturate" class="group__input" min="0" max="300" value="100"
+                    tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
                 <div class="group__item group__item_range">
                   <label for="brightness" class="group__label group-item">Яркость</label>
                   <input type="range" id="brightness" name="brightness" class="group__input group-item" min="0"
-                    max="300" value="100">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                    max="300" value="100" tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
                 <div class="group__item group__item_range">
                   <label for="contrast" class="group__label group-item">Контраст</label>
                   <input type="range" id="contrast" name="contrast" class="group__input group-item" min="0" max="300"
-                    value="100">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                    value="100" tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
                 <div class="group__item group__item_range">
                   <label for="hue-rotate" class="group__label group-item">Оттенок</label>
                   <input type="range" id="hue-rotate" name="hue-rotate" class="group__input group-item" min="0"
-                    max="360" value="0">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                    max="360" value="0" tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
                 <div class="group__item group__item_range">
                   <label for="blur" class="group__label group-item">Размытие</label>
-                  <input type="range" id="blur" name="blur" class="group__input group-item" min="0" max="10" value="0">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                  <input type="range" id="blur" name="blur" class="group__input group-item" min="0" max="10" value="0"
+                    tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
                 <div class="group__row">
                   <div class="group__item group__item_checkbox">
                     <label for="sepia" class="group__label group-item">Сепия</label>
-                    <input type="checkbox" id="sepia" name="sepia" class="group__input group-item">
+                    <input type="checkbox" id="sepia" name="sepia" class="group__input group-item" tabindex="0">
                   </div>
                   <div class="group__item group__item_checkbox">
                     <label for="invert" class="group__label group-item">Инвертировать цвета</label>
-                    <input type="checkbox" id="invert" name="invert" class="group__input group-item">
+                    <input type="checkbox" id="invert" name="invert" class="group__input group-item" tabindex="0">
                   </div>
                 </div>
               </fieldset>
@@ -84,11 +96,11 @@
                 <div class="group__row">
                   <div class="group__item group__item_checkbox">
                     <label for="scaleX" class="group__label">По вертикали</label>
-                    <input type="checkbox" id="scaleX" name="scaleX" class="group__input">
+                    <input type="checkbox" id="scaleX" name="scaleX" class="group__input" tabindex="0">
                   </div>
                   <div class="group__item group__item_checkbox">
                     <label for="scaleY" class="group__label">По горизонтали</label>
-                    <input type="checkbox" id="scaleY" name="scaleY" class="group__input">
+                    <input type="checkbox" id="scaleY" name="scaleY" class="group__input" tabindex="0">
                   </div>
                 </div>
               </fieldset>
@@ -99,12 +111,15 @@
                 <div class="group__item group__item_range">
                   <label for="border-width" class="group__label">Толщина</label>
                   <input type="range" id="border-width" name="border-width" class="group__input" min="0" max="70"
-                    value="0">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                    value="0" tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
                 <div class="group__item group__item_color">
                   <label for="border-color" class="group__label">Цвет (зависит от оттенка)</label>
-                  <input type="color" id="border-color" name="border-color" class="group__input" value="#dea3fe">
+                  <input type="color" id="border-color" name="border-color" class="group__input" value="#dea3fe"
+                    tabindex="0">
                 </div>
               </fieldset>
               <fieldset class="toolbox__group group" id="radius">
@@ -114,13 +129,15 @@
                 <div class="group__item group__item_range">
                   <label for="border-radius" class="group__label">Закругление</label>
                   <input type="range" id="border-radius" name="border-radius" class="group__input" min="0" max="300"
-                    value="0">
-                  <img src="assets/reset.png" alt="Сброс" class="group__reset">
+                    value="0" tabindex="0">
+                  <button class="group__reset reset" tabindex="0">
+                    <img src="assets/reset.png" alt="Сброс" class="reset__image">
+                  </button>
                 </div>
               </fieldset>
             </div>
             <div class="toolbox__download button-tool">
-              <button id="download" class="button-tool__btn">Скачать</button>
+              <button id="download" class="button-tool__btn" tabindex="0">Скачать</button>
             </div>
           </div>
           <div class="workspace__result result">
@@ -135,8 +152,8 @@
     <footer class="footer">
       <div class="container">
         <div class="footer__content">
-          <div class="footer__contacts">By <a href="https://github.com/id-andyyy" class="footer__contacts_link"
-              target="_blank">Andy</a></div>
+          <div class="footer__contacts" tabindex="0">By <a href="https://github.com/id-andyyy"
+              class="footer__contacts_link" target="_blank">Andy</a></div>
         </div>
       </div>
     </footer>

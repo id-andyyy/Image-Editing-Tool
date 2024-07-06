@@ -9,6 +9,8 @@ $danger-color: #feb0a3;
 $success-color: #c4fea3;
 $light-color: #a3f1fe;
 $accent-color: #dea3fe;
+$border-input-color: #b2b2b2;
+$bg-input-color: #efefef;
 
 @function adaptive-value($max-value, $min-value, $max-size: 1280, $min-size: 320) {
   @return calc(
@@ -108,7 +110,8 @@ body {
     @media (max-width: 425px) {
       min-width: 110px;
     }
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $main-font-color;
       color: white;
     }
@@ -159,8 +162,20 @@ body {
 
 @mixin range-color($color) {
   background-image: linear-gradient($color, $color);
+  &:focus:focus-visible {
+    outline: 2px solid $color;
+  }
   @include browsers-thumb() {
     background: $color;
+  }
+}
+
+@mixin checkbox-color($color) {
+  &:checked {
+    background-color: $color;
+  }
+  &:focus:focus-visible {
+    outline: 2px solid $color;
   }
 }
 
@@ -211,9 +226,9 @@ body {
       appearance: none;
       width: adaptive-value(235, 152);
       height: 10px;
-      border: 1px solid #b2b2b2;
+      border: 1px solid $border-input-color;
       border-radius: 5px;
-      background: #efefef;
+      background: $bg-input-color;
       background-repeat: no-repeat;
       cursor: ew-resize;
       align-self: center;
@@ -254,24 +269,22 @@ body {
       -webkit-appearance: none;
       appearance: none;
       cursor: pointer;
-      border: 1px solid #b2b2b2;
-      background-color: #efefef;
+      border: 1px solid $border-input-color;
+      background-color: $bg-input-color;
       border-radius: 4px;
       width: adaptive-value(22, 18);
       height: adaptive-value(22, 18);
-      &:checked {
-        &#sepia {
-          background-color: $danger-color;
-        }
-        &#invert {
-          background-color: $light-color;
-        }
-        &#scaleX {
-          background-color: $accent-color;
-        }
-        &#scaleY {
-          background-color: $success-color;
-        }
+      &#sepia {
+        @include checkbox-color($danger-color);
+      }
+      &#invert {
+        @include checkbox-color($light-color);
+      }
+      &#scaleX {
+        @include checkbox-color($accent-color);
+      }
+      &#scaleY {
+        @include checkbox-color($success-color);
       }
     }
     &[type="color"] {
@@ -287,10 +300,25 @@ body {
         border-radius: 4px;
         border: none;
       }
+      &:focus:focus-visible {
+        outline: 2px solid $accent-color;
+      }
     }
   }
   &__reset {
     cursor: pointer;
+    background-color: white;
+    transform: rotate(0deg);
+    transition: all 0.5s;
+    &:hover,
+    &:focus {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.reset {
+  &__image {
     width: 100%;
   }
 }
@@ -323,6 +351,7 @@ body {
   &__contacts {
     font-size: adaptive-value(16, 14);
     font-weight: 500;
+    position: relative;
     &_link {
       font-weight: 700;
       color: $accent-font-color;
@@ -339,10 +368,10 @@ body {
       height: 22px;
       opacity: 0;
       transform: translate(200%, -10%);
-      transition: all 0.5s ease-in-out;
+      transition: all 0.5s;
     }
-    &:hover {
-      position: relative;
+    &:hover,
+    &:focus {
       &::after {
         opacity: 1;
         transform: translate(100%, -10%);
