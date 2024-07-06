@@ -93,7 +93,7 @@ body {
 .container {
   width: clamp(320px, 89.84375vw, 1150px);
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 
 .greeting {
@@ -130,6 +130,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: calc(20px + 40 * (100vw - 768px) / 512);
+}
+@media (min-width: 1280px) {
+  .workspace {
+    gap: 60px;
+  }
 }
 @media (max-width: 768px) {
   .workspace {
@@ -138,7 +144,7 @@ body {
 }
 
 .toolbox {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 .toolbox__upload {
   display: flex;
