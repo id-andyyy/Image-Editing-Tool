@@ -1,6 +1,7 @@
 const imageNode = document.querySelector('#image');
 const filenameNode = document.querySelector('.button-tool__filename');
 const uploadNode = document.querySelector('#upload');
+const resultErrorNode = document.querySelector('.result__error');
 uploadNode.addEventListener('input', handleFileSelect);
 
 const toolsNode = document.querySelectorAll('.group__input');
@@ -28,15 +29,31 @@ function getShortFilename(filename) {
 function readFile(file) {
   const imageUrl = URL.createObjectURL(file);
   imageNode.src = imageUrl;
+  debounce(hideError, 0)();
   imageNode.onerror = function () {
+    isError = true;
     filenameNode.textContent = 'Файл не выбран';
     showError('Картинка не поддерживается. Загрузите другую.');
-    imageNode.src = 'assets/default.png';
+    imageNode.src = 'assets/default.webp';
   }
 }
 
 function showError(message) {
-  alert(message);
+  resultErrorNode.style.display = 'block';
+  resultErrorNode.textContent = message;
+  debounce(hideError, 7500)();
+}
+
+function hideError() {
+  resultErrorNode.style.display = 'none';
+}
+
+function debounce(func, ms) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
+  };
 }
 
 function handleRangeInput(propertyName) {

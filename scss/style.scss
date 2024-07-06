@@ -32,7 +32,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 7px;
-  margin: 15px 0 0 0;
+  margin: 15px 0 30px 0;
   &__logo {
     height: 1em;
     margin: 0 #{calc(15 / 40) + em} 0 0;
@@ -59,19 +59,30 @@ body {
 
 .workspace {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 }
 
 .toolbox {
+  margin-bottom: 25px;
   &__upload {
     display: flex;
     align-items: center;
     gap: #{calc(15 / 16) + em};
+    margin-bottom: adaptive-value(28, 14);
+  }
+  &__download {
+    margin-top: -10px;
   }
 }
 
 .button-tool {
   font-size: adaptive-value(16, 14);
+  display: flex;
+  justify-content: center;
   &__input {
     display: none;
   }
@@ -88,7 +99,7 @@ body {
     font-weight: 600;
     text-align: center;
     cursor: pointer;
-    padding: 7px 11px;
+    padding: adaptive-value(7, 5) 11px;
     min-width: 160px;
     @media (max-width: 425px) {
       min-width: 110px;
@@ -130,6 +141,18 @@ body {
   }
 }
 
+@mixin browsers-color-swatch {
+  &::-webkit-color-swatch {
+    @content;
+  }
+  &::-moz-color-swatch {
+    @content;
+  }
+  &::-ms-reveal {
+    @content;
+  }
+}
+
 @mixin range-color($color) {
   background-image: linear-gradient($color, $color);
   @include browsers-thumb() {
@@ -138,24 +161,58 @@ body {
 }
 
 .group {
+  margin-bottom: adaptive-value(25, 16);
   &__description {
+    grid-column: span 2;
     font-size: adaptive-value(18, 15);
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    margin-bottom: #{14 / 18 + em};
   }
-  &__legend {
-    text-align: center;
+  &__item {
+    gap: adaptive-value(15, 10);
+    &_range {
+      display: grid;
+      grid-template-columns: 1fr auto adaptive-value(21, 18);
+      margin-bottom: 12px;
+      @media (max-width: 768px) {
+        margin-bottom: 18px;
+      }
+    }
+    &_checkbox {
+      display: flex;
+    }
+    &_color {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &__row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &__label {
+    font-size: adaptive-value(16, 14);
+    font-weight: 500;
+    text-align: end;
+    align-self: center;
   }
   &__input {
     &[type="range"] {
       -moz-appearance: none;
       -webkit-appearance: none;
       appearance: none;
-      width: 235px;
+      width: adaptive-value(235, 152);
       height: 10px;
       border: 1px solid #b2b2b2;
       border-radius: 5px;
       background: #efefef;
       background-repeat: no-repeat;
+      cursor: ew-resize;
+      align-self: center;
       @include browsers-thumb {
         -moz-appearance: none;
         -webkit-appearance: none;
@@ -164,32 +221,105 @@ body {
         height: adaptive-value(21, 20);
         border-radius: 50%;
         border: none;
-        cursor: ew-resize;
       }
-      @include browsers-track() {
+      @include browsers-track {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
         box-shadow: none;
         background: transparent;
       }
+      &#saturate,
+      &#border-radius {
+        @include range-color($danger-color);
+      }
+      &#brightness,
+      &#hue-rotate {
+        @include range-color($accent-color);
+      }
+      &#contrast,
+      &#border-width {
+        @include range-color($light-color);
+      }
+      &#blur {
+        @include range-color($success-color);
+      }
     }
-    &#saturate,
-    &#border-radius {
-      @include range-color($danger-color);
+    &[type="checkbox"] {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      border: 1px solid #b2b2b2;
+      background-color: #efefef;
+      border-radius: 4px;
+      width: adaptive-value(22, 18);
+      height: adaptive-value(22, 18);
+      &:checked {
+        &#sepia {
+          background-color: $danger-color;
+        }
+        &#invert {
+          background-color: $light-color;
+        }
+        &#scaleX {
+          background-color: $accent-color;
+        }
+        &#scaleY {
+          background-color: $success-color;
+        }
+      }
     }
-    &#brightness,
-    &#hue-rotate {
-      @include range-color($accent-color);
+    &[type="color"] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: adaptive-value(46, 37);
+      height: 31px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      @include browsers-color-swatch {
+        border-radius: 4px;
+        border: none;
+      }
     }
-    &#contrast,
-    &#border-width {
-      @include range-color($light-color);
-    }
-    &#blur {
-      @include range-color($success-color);
+  }
+  &__reset {
+    cursor: pointer;
+    width: 100%;
+  }
+}
+
+.result {
+  &__error {
+    color: $danger-font-color;
+    font-weight: 700;
+    border: 3px dashed $danger-font-color;
+    text-align: center;
+    padding: 12px 18px;
+    display: none;
+  }
+  &__image {
+    max-width: 640px;
+    #image {
+      border-style: solid !important;
+      max-width: 100%;
     }
   }
 }
 
-#image {
-  border-style: solid !important;
-  max-width: 100%;
+.footer {
+  margin-top: 25px;
+  padding-bottom: 20px;
+  &__contacts {
+    text-align: center;
+    font-size: adaptive-value(16, 14);
+    font-weight: 500;
+    &_link {
+      font-weight: 700;
+      color: $accent-font-color;
+      text-decoration: underline;
+    }
+  }
 }

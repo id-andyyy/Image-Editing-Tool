@@ -38,76 +38,80 @@
                 <div class="group__description">
                   <legend class="group__legend">Фильтры</legend>
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="saturate" class="group__label">Насыщенность</label>
-                  <input type="range" id="saturate" name="saturate" class="group__input" min="0" max="500" value="100">
+                  <input type="range" id="saturate" name="saturate" class="group__input" min="0" max="300" value="100">
                   <img src="assets/reset.png" alt="Сброс" class="group__reset">
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="brightness" class="group__label group-item">Яркость</label>
                   <input type="range" id="brightness" name="brightness" class="group__input group-item" min="0"
-                    max="500" value="100">
+                    max="300" value="100">
                   <img src="assets/reset.png" alt="Сброс" class="group__reset">
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="contrast" class="group__label group-item">Контраст</label>
-                  <input type="range" id="contrast" name="contrast" class="group__input group-item" min="0" max="500"
+                  <input type="range" id="contrast" name="contrast" class="group__input group-item" min="0" max="300"
                     value="100">
                   <img src="assets/reset.png" alt="Сброс" class="group__reset">
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="hue-rotate" class="group__label group-item">Оттенок</label>
                   <input type="range" id="hue-rotate" name="hue-rotate" class="group__input group-item" min="0"
                     max="360" value="0">
                   <img src="assets/reset.png" alt="Сброс" class="group__reset">
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="blur" class="group__label group-item">Размытие</label>
-                  <input type="range" id="blur" name="blur" class="group__input group-item" min="0" max="100" value="0">
+                  <input type="range" id="blur" name="blur" class="group__input group-item" min="0" max="10" value="0">
                   <img src="assets/reset.png" alt="Сброс" class="group__reset">
                 </div>
-                <div class="group__item">
-                  <label for="invert" class="group__label group-item">Инвертировать цвета</label>
-                  <input type="checkbox" id="invert" name="invert" class="group__input group-item">
-                </div>
-                <div class="group__item">
-                  <label for="sepia" class="group__label group-item">Сепия</label>
-                  <input type="checkbox" id="sepia" name="sepia" class="group__input group-item">
+                <div class="group__row">
+                  <div class="group__item group__item_checkbox">
+                    <label for="sepia" class="group__label group-item">Сепия</label>
+                    <input type="checkbox" id="sepia" name="sepia" class="group__input group-item">
+                  </div>
+                  <div class="group__item group__item_checkbox">
+                    <label for="invert" class="group__label group-item">Инвертировать цвета</label>
+                    <input type="checkbox" id="invert" name="invert" class="group__input group-item">
+                  </div>
                 </div>
               </fieldset>
               <fieldset class="toolbox__group group" id="orientation">
                 <div class="group__description">
                   <legend class="group__legend">Ориентация</legend>
                 </div>
-                <div class="group__item">
-                  <label for="scaleX" class="group__label">Отразить по вертикали</label>
-                  <input type="checkbox" id="scaleX" name="scaleX" class="group__input">
-                </div>
-                <div class="group__item">
-                  <label for="scaleY" class="group__label">Отразить по горизонтали</label>
-                  <input type="checkbox" id="scaleY" name="scaleY" class="group__input">
+                <div class="group__row">
+                  <div class="group__item group__item_checkbox">
+                    <label for="scaleX" class="group__label">По вертикали</label>
+                    <input type="checkbox" id="scaleX" name="scaleX" class="group__input">
+                  </div>
+                  <div class="group__item group__item_checkbox">
+                    <label for="scaleY" class="group__label">По горизонтали</label>
+                    <input type="checkbox" id="scaleY" name="scaleY" class="group__input">
+                  </div>
                 </div>
               </fieldset>
               <fieldset class="toolbox__group group" id="border">
                 <div class="group__description">
                   <legend class="group__legend">Обводка</legend>
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="border-width" class="group__label">Толщина</label>
-                  <input type="range" id="border-width" name="border-width" class="group__input" min="0" max="100"
+                  <input type="range" id="border-width" name="border-width" class="group__input" min="0" max="70"
                     value="0">
                   <img src="assets/reset.png" alt="Сброс" class="group__reset">
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_color">
                   <label for="border-color" class="group__label">Цвет (зависит от оттенка)</label>
-                  <input type="color" id="border-color" name="border-color" class="group__input" value="#ae00ff">
+                  <input type="color" id="border-color" name="border-color" class="group__input" value="#dea3fe">
                 </div>
               </fieldset>
               <fieldset class="toolbox__group group" id="radius">
                 <div class="group__description">
                   <legend class="group__legend">Углы</legend>
                 </div>
-                <div class="group__item">
+                <div class="group__item group__item_range">
                   <label for="border-radius" class="group__label">Закругление</label>
                   <input type="range" id="border-radius" name="border-radius" class="group__input" min="0" max="300"
                     value="0">
@@ -121,7 +125,8 @@
           </div>
           <div class="workspace__result result">
             <div class="result__image">
-              <img src="assets/default.png" alt="Загруженное изображение" id="image">
+              <div class="result__error">Произошла ошибка. Попробуйте ещё раз.</div>
+              <img src="assets/default.webp" alt="Загруженное изображение" id="image">
             </div>
           </div>
         </section>
