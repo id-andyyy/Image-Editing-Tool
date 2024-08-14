@@ -534,14 +534,6 @@ body {
   width: 100%;
 }
 
-.result__error {
-  color: #ff5a3e;
-  font-weight: 700;
-  border: 3px dashed #ff5a3e;
-  text-align: center;
-  padding: 12px 18px;
-  display: none;
-}
 .result__image {
   max-width: 640px;
 }

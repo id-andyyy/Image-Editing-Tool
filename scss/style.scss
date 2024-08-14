@@ -411,14 +411,6 @@ body {
 }
 
 .result {
-  &__error {
-    color: $danger-font-color;
-    font-weight: 700;
-    border: 3px dashed $danger-font-color;
-    text-align: center;
-    padding: 12px 18px;
-    display: none;
-  }
   &__image {
     max-width: 640px;
     #image {
