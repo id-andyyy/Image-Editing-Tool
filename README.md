@@ -51,7 +51,7 @@ Development features:
 - Animations when hovering over various elements
 - Background decorative elements
 - BEM methodology
-- Pure JavaScript (the code is broken down into functions)
+- Vanilla JavaScript (the code is broken down into functions)
 - Meta tags are configured
 
 ## Implementation of the functionality
