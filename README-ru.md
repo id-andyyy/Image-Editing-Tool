@@ -1,4 +1,10 @@
 ![Арт](https://i.postimg.cc/VkzY0nM6/art.png)
+
+![GitHub Created At](https://img.shields.io/github/created-at/id-andyyy/Image-Editing-Tool?style=flat&color=%23AA3FF6)
+![Lines Of Code](https://tokei.rs/b1/github/id-andyyy/Image-Editing-Tool?style=flat&category=code&color=%23EC664A)
+![Top Language](https://img.shields.io/github/languages/top/id-andyyy/Image-Editing-Tool?style=flat)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fid-andyyy.github.io%2FImage-Editing-Tool%2F&style=flat)
+
 # Image Editing Tool&nbsp;&#127912;
 
 Сайт с возможностью редактировать и затем скачивать свои изображения&nbsp;&#127756;.
